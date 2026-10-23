@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Thornbury Crawl · Set Times</title>
+<meta name="description" content="Thornbury Crawl, Sat 24 Oct 2026 — what's on now, full lineup, under-18 policies and a shareable plan.">
+<meta name="theme-color" content="#F3D24C" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1E1B16" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F3D24C'/%3E%3Ctext x='32' y='45' font-size='36' text-anchor='middle' font-family='Arial Black,Arial' font-weight='900' fill='%23E5509A'%3Etc%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Archivo:wdth,wght@62..125,400..800&display=swap" rel="stylesheet">
+<style>
+/* ---------- tokens ---------- */
+:root{
+  --bg:#F3D24C; --fg:#1E1B16; --muted:#5E5232; --hair:rgba(30,27,22,.18);
+  --tag-bg:#1E1B16; --tag-fg:#FFFCF0;
+  --sign:#FFFCF0; --sign-fg:#1E1B16; --sign-muted:#6B6350; --sign-edge:#1E1B16;
+  --pole:#1E1B16; --pink:#D63E89; --blue:#2F86C4;
+  --ok:#1D7A46; --part:#B4530C; --no-bg:#1E1B16; --no-fg:#F3D24C;
+  --nav:#1E1B16; --nav-fg:#F3D24C;
+  --display:'Bowlby One', 'Arial Black', Impact, sans-serif;
+  --body:'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --hourW:124px; --labelW:176px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme=light]){
+  --bg:#1E1B16; --fg:#F6EFD9; --muted:#B5A983; --hair:rgba(246,239,217,.14);
+  --tag-bg:#F3D24C; --tag-fg:#1E1B16;
+  --sign:#2B2720; --sign-fg:#F6EFD9; --sign-muted:#B5A983; --sign-edge:#4A4234;
+  --pole:#F3D24C; --pink:#F06AAE; --blue:#6CB8EC;
+  --ok:#2E9E5E; --part:#D5711F; --no-bg:#F6EFD9; --no-fg:#1E1B16;
+  --nav:#2B2720; --nav-fg:#F3D24C; color-scheme: dark;
+}}
+:root[data-theme=dark]{
+  --bg:#1E1B16; --fg:#F6EFD9; --muted:#B5A983; --hair:rgba(246,239,217,.14);
+  --tag-bg:#F3D24C; --tag-fg:#1E1B16;
+  --sign:#2B2720; --sign-fg:#F6EFD9; --sign-muted:#B5A983; --sign-edge:#4A4234;
+  --pole:#F3D24C; --pink:#F06AAE; --blue:#6CB8EC;
+  --ok:#2E9E5E; --part:#D5711F; --no-bg:#F6EFD9; --no-fg:#1E1B16;
+  --nav:#2B2720; --nav-fg:#F3D24C; color-scheme: dark;
+}
+
+/* ---------- base ---------- */
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.45 var(--body);font-variant-numeric:tabular-nums;padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+a{color:inherit;text-underline-offset:3px}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+.hidden{display:none!important}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- header ---------- */
+.top{position:sticky;top:0;z-index:40;background:var(--bg);border-bottom:2px solid var(--fg)}
+.top .wrap{display:flex;align-items:center;gap:12px;min-height:58px}
+.mark{font-family:var(--display);font-size:22px;line-height:.9;color:var(--pink);text-decoration:none;letter-spacing:-.3px;margin-right:auto;white-space:nowrap}
+.mark small{display:block;font:600 12px/1.2 var(--body);color:var(--muted);letter-spacing:0;margin-top:3px}
+.kids{display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:600;font-size:14px;user-select:none;white-space:nowrap}
+.kids input{position:absolute;opacity:0;pointer-events:none}
+.sw{width:42px;height:24px;border-radius:99px;background:var(--hair);border:2px solid var(--fg);position:relative;flex:none;transition:background .15s}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:var(--fg);transition:transform .15s}
+.kids input:checked + .sw{background:var(--ok);border-color:var(--ok)}
+.kids input:checked + .sw::after{transform:translateX(18px);background:#fff}
+.kids input:focus-visible + .sw{outline:3px solid var(--blue);outline-offset:2px}
+.icon-btn{background:none;border:2px solid var(--fg);border-radius:10px;width:36px;height:36px;display:grid;place-items:center;cursor:pointer;flex:none}
+
+/* tabs: top on desktop, bottom bar on mobile */
+.tabs{display:flex;gap:4px}
+.tabs button{background:none;border:0;cursor:pointer;font-weight:700;font-size:15px;padding:8px 12px;border-radius:10px;position:relative;white-space:nowrap}
+.tabs button[aria-current=page]{background:var(--fg);color:var(--bg)}
+.badge{display:inline-grid;place-items:center;min-width:18px;height:18px;padding:0 5px;border-radius:99px;background:var(--pink);color:#fff;font-size:11px;font-weight:800;margin-left:5px;vertical-align:1px}
+@media (max-width:759px){
+  .top .tabs{display:none}
+  .kids .lbl-long{display:none}
+  nav.bottom{position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--nav);padding:6px 6px calc(6px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+  nav.bottom button{background:none;border:0;color:var(--nav-fg);opacity:.72;font-weight:700;font-size:12px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;border-radius:10px;cursor:pointer}
+  nav.bottom button svg{width:22px;height:22px}
+  nav.bottom button[aria-current=page]{opacity:1;background:rgba(243,210,76,.14)}
+  nav.bottom .badge{position:absolute;margin:0;transform:translate(14px,-4px)}
+  nav.bottom button{position:relative}
+}
+@media (min-width:760px){ nav.bottom{display:none} body{padding-bottom:0} .kids .lbl-short{display:none} }
+
+/* ---------- shared bits ---------- */
+h2.view-title{font-family:var(--display);font-weight:400;font-size:clamp(28px,5vw,40px);line-height:1;margin:22px 0 6px;letter-spacing:-.3px}
+.lede{color:var(--muted);margin:0 0 16px;max-width:62ch}
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;line-height:1;padding:4px 7px;border-radius:6px;white-space:nowrap;color:#fff}
+.chip.ok{background:var(--ok)} .chip.part{background:var(--part)} .chip.no{background:var(--no-bg);color:var(--no-fg)}
+.tag{display:inline-block;background:var(--tag-bg);color:var(--tag-fg);font:800 15px/1.1 var(--body);font-stretch:85%;padding:6px 12px 7px;clip-path:polygon(0 6%,100% 0,98% 100%,2% 94%)}
+.star{background:none;border:0;cursor:pointer;font-size:22px;line-height:1;padding:6px;margin:-6px -4px -6px 0;color:var(--sign-muted)}
+.star[aria-pressed=true]{color:var(--pink)}
+.artist{background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;text-align:left;cursor:pointer}
+.artist:hover{text-decoration:underline;text-decoration-thickness:2px}
+.btn{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--fg);background:none;border-radius:12px;padding:9px 14px;font-weight:700;cursor:pointer;text-decoration:none}
+.btn.solid{background:var(--fg);color:var(--bg)}
+.btn.pink{background:var(--pink);border-color:var(--pink);color:#fff}
+.empty{border:2px dashed var(--fg);border-radius:14px;padding:28px 20px;text-align:center;max-width:520px;margin:24px auto}
+.empty p{margin:0 0 6px}
+
+/* ---------- NOW: the street ---------- */
+.clock{display:flex;align-items:flex-end;flex-wrap:wrap;gap:6px 16px;margin:20px 0 4px}
+.clock .t{font-family:var(--display);font-size:clamp(56px,14vw,96px);line-height:.85;letter-spacing:-1px}
+.clock .meta{padding-bottom:6px;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.live{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:13px;color:var(--pink)}
+.live::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--pink);box-shadow:0 0 0 0 var(--pink);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.scrub{margin:10px 0 2px;max-width:640px}
+.scrub input{width:100%;accent-color:var(--pink);height:32px;cursor:pointer}
+.ticks{display:flex;justify-content:space-between;font-size:12px;font-weight:600;color:var(--muted);padding:0 2px}
+.summary{font-weight:600;margin:14px 0 4px}
+.street{position:relative;margin:18px 0 0;padding-left:30px;max-width:720px}
+.street::before{content:"";position:absolute;left:11px;top:4px;bottom:0;width:5px;background:var(--pole);border-radius:3px}
+.dir{font-size:12px;font-weight:700;color:var(--muted);margin:0 0 10px -30px;padding-left:30px}
+.stop{position:relative;margin:0 0 22px}
+.stop::before{content:"";position:absolute;left:-26px;top:8px;width:17px;height:17px;border-radius:50%;background:var(--bg);border:4px solid var(--pole)}
+.stop-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.stop-head .num{font-size:13px;font-weight:700;color:var(--muted);text-decoration:none}
+.stop-head .num:hover{text-decoration:underline}
+.signs{display:grid;gap:8px;margin-top:8px;padding-left:14px;border-left:3px solid var(--pole);margin-left:16px}
+.sign{background:var(--sign);color:var(--sign-fg);border:2px solid var(--sign-edge);border-radius:4px;padding:10px 12px;display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:start;box-shadow:3px 3px 0 var(--sign-edge)}
+.sign.next{box-shadow:none;border-style:dashed;background:transparent;color:var(--fg);border-color:var(--fg)}
+.sign .when{font-size:13px;font-weight:600;color:var(--sign-muted);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.sign.next .when{color:var(--muted)}
+.sign .who{font-weight:800;font-size:19px;line-height:1.15;font-stretch:92%}
+.sign.next .who{font-size:16px}
+.sign .who small{font-weight:600;font-size:13px;color:var(--sign-muted)}
+.sign.mine{border-color:var(--pink);box-shadow:3px 3px 0 var(--pink)}
+.sign.next.mine{border-color:var(--pink);box-shadow:none}
+.bar{height:4px;background:var(--hair);border-radius:2px;margin-top:6px;grid-column:1/-1;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--pink)}
+.after{max-width:720px;margin:6px 0 0 30px;font-size:14px;color:var(--muted)}
+.after b{color:var(--fg)}
+
+/* ---------- LINEUP: grid ---------- */
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:4px 0 14px}
+.search{flex:1 1 220px;max-width:360px;position:relative}
+.search input{width:100%;font:500 16px var(--body);padding:10px 12px 10px 38px;border:2px solid var(--fg);border-radius:12px;background:var(--sign);color:var(--sign-fg)}
+.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:18px;height:18px;opacity:.6}
+.seg{display:inline-flex;border:2px solid var(--fg);border-radius:12px;overflow:hidden}
+.seg button{background:none;border:0;padding:8px 12px;font-weight:700;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--fg);color:var(--bg)}
+@media (max-width:759px){ .seg.layout{display:none} }
+
+.grid-wrap{border:2px solid var(--fg);border-radius:12px;overflow:auto;max-height:calc(100vh - 230px);background:var(--sign);color:var(--sign-fg);overscroll-behavior:contain}
+.grid{position:relative;width:calc(var(--labelW) + var(--hourW)*15)}
+.g-head{display:flex;position:sticky;top:0;z-index:6;background:var(--sign);border-bottom:2px solid var(--sign-edge)}
+.g-head .corner{width:var(--labelW);flex:none;position:sticky;left:0;z-index:2;background:var(--sign);border-right:2px solid var(--sign-edge)}
+.g-head .hr{width:var(--hourW);flex:none;padding:8px 6px;font-weight:800;font-size:13px;border-left:1px solid var(--hair)}
+.g-row{display:flex;border-bottom:1px solid var(--hair);min-height:62px}
+.g-label{width:var(--labelW);flex:none;position:sticky;left:0;z-index:4;background:var(--sign);border-right:2px solid var(--sign-edge);padding:8px 10px;display:flex;flex-direction:column;justify-content:center;gap:3px}
+.g-label b{font-weight:800;font-size:14px;line-height:1.15;font-stretch:88%}
+.g-label span{font-size:11.5px;font-weight:700}
+.g-label .ok{color:var(--ok)} .g-label .part{color:var(--part)} .g-label .no{color:var(--sign-muted)}
+.g-track{position:relative;flex:1;background-image:repeating-linear-gradient(90deg,transparent 0 calc(var(--hourW) - 1px),var(--hair) calc(var(--hourW) - 1px) var(--hourW))}
+.blk{position:absolute;top:6px;bottom:6px;border-radius:4px;padding:4px 7px 4px 9px;overflow:hidden;font-size:12px;line-height:1.2;text-align:left;border:1.5px solid var(--sign-edge);background:var(--bg);color:var(--fg);cursor:pointer;display:flex;flex-direction:column;justify-content:center}
+.blk::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px}
+.blk.ok::before{background:var(--ok)} .blk.part::before{background:var(--part)} .blk.no::before{background:var(--fg);opacity:.35}
+.blk.no{background:transparent;color:var(--sign-fg);border-style:dashed}
+.blk .bt{font-size:11px;font-weight:600;opacity:.75;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.blk .bn{font-weight:800;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-stretch:90%}
+.blk.mine{outline:3px solid var(--pink);outline-offset:-1px}
+.blk.lane1{bottom:calc(50% + 1px)} .blk.lane2{top:calc(50% + 1px)}
+.blk.past{opacity:.35}
+.nowline{position:absolute;top:0;bottom:0;width:3px;background:var(--pink);z-index:5;pointer-events:none}
+.nowline span{position:sticky;top:6px;display:inline-block;margin-left:5px;font-size:11px;font-weight:800;color:#fff;background:var(--pink);padding:2px 5px;border-radius:4px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:13px;font-weight:600;margin:10px 0 0;color:var(--muted)}
+
+/* ---------- lists (lineup list, venues, plan) ---------- */
+.hour{font-family:var(--display);font-weight:400;font-size:26px;margin:22px 0 8px;position:sticky;top:60px;z-index:3;background:var(--bg);padding:4px 0}
+.rows{list-style:none;margin:0;padding:0;display:grid;gap:8px;max-width:760px}
+.row{display:grid;grid-template-columns:92px 1fr auto;gap:2px 12px;align-items:start;background:var(--sign);color:var(--sign-fg);border:2px solid var(--sign-edge);border-radius:4px;padding:10px 12px}
+.row.mine{border-color:var(--pink)}
+.row.past{opacity:.45}
+.row .tm{font-weight:800;font-size:14px;line-height:1.25}
+.row .tm small{display:block;font-weight:600;color:var(--sign-muted);font-size:12px}
+.row .who{font-weight:800;font-size:17px;line-height:1.2;font-stretch:92%}
+.row .where{font-size:13.5px;color:var(--sign-muted);margin-top:3px;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center}
+
+.venues{display:grid;gap:26px;grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
+.venue .addr{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:8px 0 4px;font-size:14px}
+.venue .pol{font-size:14px;font-weight:700;margin:2px 0 10px;display:flex;gap:8px;align-items:center}
+.venue .rows{gap:6px}
+.venue .row{grid-template-columns:88px 1fr auto;padding:8px 10px}
+.venue .row .who{font-size:15.5px}
+.foot{margin:36px 0 20px;font-size:13.5px;color:var(--muted);max-width:70ch}
+
+.gap{font-size:13px;font-weight:700;color:var(--muted);padding:2px 0 2px 104px}
+.gap.clash{color:var(--part)}
+.plan-actions{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 18px}
+.shared{border:2px solid var(--pink);border-radius:14px;padding:14px;margin:0 0 22px;max-width:760px}
+.shared h3{margin:0 0 4px;font-size:18px}
+.shared p{margin:0 0 10px;color:var(--muted)}
+
+/* ---------- sheet ---------- */
+dialog.sheet{border:0;padding:0;background:var(--sign);color:var(--sign-fg);width:min(520px,100%);max-height:85vh;border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+dialog.sheet::backdrop{background:rgba(20,18,14,.55)}
+@media (max-width:759px){ dialog.sheet{margin:auto auto 0;border-radius:18px 18px 0 0;max-width:100%;padding-bottom:env(safe-area-inset-bottom)} }
+dialog.sheet[open]{animation:up .22s ease-out}
+@keyframes up{from{transform:translateY(24px);opacity:0}}
+.sh{padding:18px 20px 20px}
+.sh .grab{width:40px;height:5px;border-radius:3px;background:var(--hair);margin:-8px auto 12px}
+.sh h3{font-family:var(--display);font-weight:400;font-size:28px;line-height:1.02;margin:0 36px 10px 0;letter-spacing:-.3px}
+.sh .x{position:absolute;top:12px;right:12px;background:none;border:0;font-size:26px;line-height:1;cursor:pointer;padding:6px 10px;color:var(--sign-muted)}
+.sh .facts{display:grid;gap:6px;margin:0 0 12px;font-size:15px}
+.sh .facts div{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.sh .blurb{margin:0 0 12px;font-size:15.5px;line-height:1.5}
+.sh .blurb.none{color:var(--sign-muted)}
+.sh .also{font-size:14px;color:var(--sign-muted);margin:0 0 14px}
+.sh .acts{display:flex;gap:10px;flex-wrap:wrap}
+.sh .btn{border-color:var(--sign-fg)}
+.sh .btn.solid{background:var(--sign-fg);color:var(--sign)}
+.sh .btn.pink{border-color:var(--pink)}
+
+.toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--fg);color:var(--bg);font-weight:700;padding:10px 16px;border-radius:12px;z-index:80;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:1}
+@media (min-width:760px){ .toast{bottom:28px} }
+@media (prefers-reduced-motion:reduce){ *{animation:none!important;transition:none!important} }
+@media (max-width:420px){ .mark{font-size:19px} .row{grid-template-columns:78px 1fr auto;gap:2px 10px} .gap{padding-left:90px} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="./">thornbury crawl<small>Sat 24 Oct · 1pm till late · free</small></a>
+    <nav class="tabs" aria-label="Views"></nav>
+    <label class="kids" title="Hide sets under-18s can't attend">
+      <input type="checkbox" id="kids">
+      <span class="sw" aria-hidden="true"></span>
+      <span class="lbl-long">With under-18s</span><span class="lbl-short">U18</span>
+    </label>
+    <button class="icon-btn" id="theme" aria-label="Switch light/dark">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="v-now"></section>
+  <section id="v-lineup" class="hidden"></section>
+  <section id="v-venues" class="hidden"></section>
+  <section id="v-plan" class="hidden"></section>
+</main>
+
+<nav class="bottom" aria-label="Views"></nav>
+
+<dialog class="sheet" id="sheet" aria-labelledby="sh-title"><div class="sh" id="sh"></div></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ===== Data =====
+   u.t: all = all ages · adult = U18 with responsible adult all day · until = with adult until cutoff c · 18 = strictly 18+
+   s: [artist, start, end, note]  (hours ≥24 = after midnight) */
+const VENUES = [
+ {n:"Gallery Unbound",a:"497 High St",k:"Gallery",u:{t:"adult"},s:[["Moose & Caz","16:30","17:30"]]},
+ {n:"Welcome to Thornbury",a:"520 High St",k:"Beer garden & band room",u:{t:"until",c:"21:30"},s:[["NoTurns","13:00","13:45"],["Broadcasting","14:00","14:45"],["Callystha","15:00","15:45"]]},
+ {n:"Northside Wines",a:"543–545 High St",k:"Wine bar",u:{t:"adult"},s:[["Snake Thighs","13:30","14:15"],["Riot Baby","14:30","15:15"],["Country & Western Ramblers","17:00","18:00"]]},
+ {n:"Kitty Somerset",a:"565 High St",k:"Cocktail bar",u:{t:"until",c:"21:00"},s:[["Skyscraper Stan & Oskar Herbig","17:30","18:30"],["Lloyd Briggs","18:30","20:30"],["The Roundtable","20:30","22:30"],["DJ Danimal","22:30","24:30"],["Mondo Ritmo","24:30","26:00"]]},
+ {n:"Cactus Room",a:"614 High St",k:"Band room",u:{t:"18"},s:[["Human Noise","16:15","17:00"],["Super X","17:45","18:30"],["Techno 666","19:15","20:00"],["Stepmother","20:45","21:30"],["Destrends","22:15","23:00"]]},
+ {n:"Thornbury Local",a:"635 High St",k:"Pub",u:{t:"adult"},s:[["Jessie Forde","15:00","15:45"],["Mystic Charmers","16:30","17:15"],["Sam White Band","19:30","20:15"],["Kate Alexander Band","20:45","21:30"],["Joan & The Giants","22:00","22:45"]]},
+ {n:"Franklins",a:"646 High St",k:"DJ bar",u:{t:"until",c:"20:00"},s:[["Julius Myles","14:00","16:00"],["Akane","16:00","18:00"],["Naliita","18:00","20:00"],["Walla C","20:00","22:00"],["Mondo Ritmo","22:00","24:00"]]},
+ {n:"Cafe Gummo",a:"711 High St",k:"Band room",u:{t:"18"},s:[["Laura Norda","17:00","17:45"],["Sloppy Jalopies","18:30","19:15"],["Slips","20:00","20:45"],["Mondo Cane","21:30","22:15"],["Hail Mary Jane","23:00","23:45"]]},
+ {n:"Jacket",a:"719 High St",k:"Jazz bar",u:{t:"until",c:"19:00"},s:[["Triveni Quartet","14:00","16:00"],["Solquemia Flamenco","17:00","19:00"],["Joel Lewis Hammond Combo","20:00","22:00"]]},
+ {n:"Shopfront 740",a:"740 High St",k:"Gallery & live room",u:{t:"18"},s:[["This Is True","16:00","16:45"],["My Guardian Angel","17:30","18:15"],["Martin Frawley","19:00","19:45"],["Piggietails","20:30","21:15"]]},
+ {n:"Shotkickers",a:"744 High St",k:"Band room",u:{t:"until",c:"20:00"},s:[["Bob Log III","14:00","14:50"],["Frons","15:15","16:00"],["Sandy Dish","16:45","17:30"],["Waist","18:15","19:00"],["The Maggie Pills","19:45","20:30"],["Ebi Nori & The Phantom Fingers","21:15","22:00"],["Drunk Mums","22:45","23:45"]]},
+ {n:"Pallino",a:"790 High St",k:"DJ bar",u:{t:"18"},s:[["Fugarlzi","16:00","18:00"],["Mz Rizk","18:00","20:00"],["Callum Starr","20:00","22:00"]]},
+ {n:"Thornbury Picture House",a:"802 High St",k:"Cinema",u:{t:"all"},s:[["Jebediah: “Are We OK?” screening","18:15","20:00"]]},
+ {n:"Bespoke Wines",a:"805 High St",k:"Bottle shop",u:{t:"adult"},s:[["Dirty Lopez & His Sax Mambo","16:00","16:45"],["Dirty Lopez & His Sax Mambo","17:00","17:45"]]},
+ {n:"Nasty's",a:"806 High St",k:"Dive bar",u:{t:"18"},s:[["Entered Records Takeover","21:00","25:00"]]},
+ {n:"Capers",a:"843 High St",k:"DJs, inside & garden",u:{t:"all"},s:[["Nina Las Vegas","18:30","19:30","Garden"],["Erika Ever","19:00","20:30"],["Swick","19:30","20:30","Garden"],["Lewis Cancut","20:30","21:30"],["Laces","21:30","22:30"],["Foura","22:30","24:00"],["Shuga","24:00","25:00"]]},
+ {n:"Bar Lingo",a:"875 High St",k:"Vinyl DJ bar",u:{t:"adult"},s:[["Lego","15:00","17:00"],["Count Attack","17:00","19:00"],["Faboo","19:00","21:00"]]},
+ {n:"Carwyn Cellars",a:"877 High St",k:"Bottle shop & pub",u:{t:"adult"},s:[["Al Gusto","15:00","18:00"]]},
+ {n:"Gigi Rooftop",a:"Level 2, 917 High St",k:"Rooftop bar",u:{t:"18"},s:[["Love Sensation DJs","14:00","15:00"],["Ella Stoeckli","15:00","17:00"],["Freddy Gardens","17:00","19:00"],["Love Sensation DJs","19:00","22:00"]]},
+ {n:"Gertrude Contemporary",a:"21–31 High St, Preston",k:"Gallery",u:{t:"adult"},s:[["Same Page Art Book Fair","11:00","17:00"]]},
+ {n:"Thornbury Bowls",a:"27 Ballantyne St",k:"Bowls club",off:true,u:{t:"adult"},s:[["Elvis","19:30","20:10"],["Fionnuala Keith","20:30","21:10"],["Sienna Thornton","21:30","22:15"],["Daisypicker","22:30","23:10"]]},
+ {n:"Tallboy & Moose",a:"270 Raglan St, Preston",k:"Brewery",off:true,u:{t:"adult"},s:[["The Burnt Sausages","16:00","17:00"]]},
+];
+
+const BLURBS = {
+ "Bob Log III":"American one-man blues band: slide guitar, kick drum and a phone-mic'd motorcycle helmet. The early slot is open to kids with a parent or guardian.",
+ "Drunk Mums":"Long-running Melbourne garage/punk rock band; 2018 album Urban Cowboy.",
+ "Destrends":"Alt-rock band known for eccentric stage costumes; EP Lousy Lover.",
+ "Joan & The Giants":"Alt-pop band; singles include ‘Feels Like Heartache’.",
+ "Frons":"Post-punk three-piece.",
+ "Dirty Lopez & His Sax Mambo":"Latin band, sax-led mambo.",
+ "The Burnt Sausages":"Melbourne's self-styled premier BBQ-themed punk band.",
+ "Daisypicker":"Band; debut album Mess Around.",
+ "Country & Western Ramblers":"Honky-tonk/country band with a regular Tuesday residency at The Gem.",
+ "Erika Ever":"Electronic producer/DJ in the NLV Records orbit; debut single ‘2 Hours’ feat. Teether.",
+ "Foura":"Melbourne DJ/producer with releases on NLV Records.",
+ "Lewis Cancut":"Electronic producer/DJ (electro, club) with releases on NLV Records; Fizzy EP with Swick.",
+ "Swick":"Producer/DJ; Fizzy EP with Lewis Cancut on Enchufada.",
+ "Nina Las Vegas":"DJ/producer, ex-triple j presenter and founder of NLV Records.",
+ "Human Noise":"Melbourne band; album Animal People.",
+ "Julius Myles":"Melbourne DJ.",
+ "Kate Alexander Band":"Melbourne singer-songwriter Kate Alexander with band.",
+ "The Maggie Pills":"Rock band; LP The Heart's Enduring Lingering Loss.",
+ "Mondo Cane":"Melbourne band; new single out Aug 2026.",
+ "Mondo Ritmo":"DJ / party crew.",
+ "Riot Baby":"Melbourne band.",
+ "Solquemia Flamenco":"Latin guitar and flamenco ensemble.",
+ "Stepmother":"Band; LP Planet Brutalicon.",
+ "Mz Rizk":"Lebanese-Australian DJ (MzRizk).",
+ "NoTurns":"Melbourne band.",
+ "Naliita":"DJ (hosts ‘Naliita's Paradise’ on NTS).",
+ "Martin Frawley":"Melbourne songwriter, formerly of jangle-pop band Twerps.",
+ "Jebediah: “Are We OK?” screening":"Film screening featuring Perth alt-rock band Jebediah. All ages.",
+ "Love Sensation DJs":"DJ crew hosting the Gigi rooftop session.",
+ "Entered Records Takeover":"Label takeover by Melbourne's Entered Records crew.",
+ "Elvis":"Also known as dogrocksradio.",
+ "Same Page Art Book Fair":"Art book and zine fair at Gertrude Contemporary.",
+ "Skyscraper Stan & Oskar Herbig":"Melbourne singer-songwriter Skyscraper Stan with Oskar Herbig.",
+};
+
+/* ===== helpers ===== */
+const $ = s => document.querySelector(s);
+const toMin = t => { const [h,m]=t.split(":").map(Number); return h*60+m; };
+const hm = m => `${Math.floor(m/60)}:${String(m%60).padStart(2,"0")}`;
+const fmt = m => { let h=Math.floor(m/60)%24, mm=m%60; const ap=h>=12?"pm":"am"; const hh=h%12||12; return mm?`${hh}:${String(mm).padStart(2,"0")}${ap}`:`${hh}${ap}`; };
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const mapUrl = v => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(v.n+", "+v.a+(v.a.includes("Preston")?", VIC":", Thornbury VIC"))}`;
+const num = v => v.off ? v.a.replace(/^\d+[–-]?\d*\s/,"") : v.a.replace(/,.*/,"").replace(/\s?High St/,"").replace("Level 2, ","");
+
+const ALL = VENUES.flatMap((v,vi) => v.s.map((s,si) => {
+  const a=toMin(s[1]), b=toMin(s[2]), u=v.u;
+  let st = (u.t==="all"||u.t==="adult") ? "ok" : u.t==="18" ? "no" : (b<=toMin(u.c) ? "ok" : a>=toMin(u.c) ? "no" : "part");
+  return {id:`${vi}.${si}`, v, vi, name:s[0], a, b, note:s[3]||"", st};
+}));
+const BY = Object.fromEntries(ALL.map(x=>[x.id,x]));
+const cutoff = v => v.u.t==="until" ? toMin(v.u.c) : null;
+
+function chip(x){
+  const v=x.v;
+  if (x.st==="no") return `<span class="chip no">18+</span>`;
+  if (x.st==="part") return `<span class="chip part">U18 till ${fmt(cutoff(v))}</span>`;
+  return `<span class="chip ok">${v.u.t==="all"?"All ages":"U18 w/ adult"}</span>`;
+}
+function policyText(v){
+  return {all:"All ages (ID for drinks)", adult:"Under-18s welcome with a responsible adult", "18":"Strictly 18+"}[v.u.t] || `Under-18s with a responsible adult until ${fmt(cutoff(v))}`;
+}
+const policyClass = v => v.u.t==="18"?"no":v.u.t==="until"?"part":"ok";
+
+/* ===== time & event state (Melbourne) ===== */
+const EVENT_DAY = "2026-10-24";
+function melNow(){
+  const p = new Intl.DateTimeFormat("en-CA",{timeZone:"Australia/Melbourne",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).formatToParts(new Date());
+  const g = t => p.find(z=>z.type===t).value;
+  return {date:`${g("year")}-${g("month")}-${g("day")}`, min:+g("hour")*60+ +g("minute")};
+}
+function eventClock(){ // minutes on event timeline, or phase
+  const n = melNow();
+  if (n.date===EVENT_DAY) return {phase: n.min<13*60 ? "pre-today" : "live", min:n.min};
+  if (n.date==="2026-10-25" && n.min<3*60) return {phase:"live", min:n.min+1440};
+  return {phase: n.date<EVENT_DAY ? "pre" : "post", min:null};
+}
+const T_MIN = 11*60, T_MAX = 26*60;
+
+/* ===== state ===== */
+const store = {
+  get(k,d){ try{ const v=localStorage.getItem("tc2-"+k); return v===null?d:JSON.parse(v);}catch(e){return d;} },
+  set(k,v){ try{ localStorage.setItem("tc2-"+k, JSON.stringify(v)); }catch(e){} }
+};
+let plan = new Set(store.get("plan", []).filter(id=>BY[id]));
+// migrate picks from the first version
+try { const old = JSON.parse(localStorage.getItem("tc-picks")||"[]"); old.forEach(k=>{ const [vn,an,st]=k.split("|"); const x=ALL.find(z=>z.v.n===vn&&z.name.replace(/ — /,": ")===an.replace(/ — /,": ")&&hm(z.a)===st.replace(/^0/,"")); if(x) plan.add(x.id); }); if(old.length){ localStorage.removeItem("tc-picks"); store.set("plan",[...plan]); } } catch(e){}
+const shared = (new URLSearchParams(location.search).get("plan")||"").split(",").filter(id=>BY[id]);
+
+const clk = eventClock();
+const state = {
+  view: shared.length ? "plan" : store.get("view","now"),
+  kids: store.get("kids", false),
+  T: clk.phase==="live" ? clk.min : 13*60,
+  follow: clk.phase==="live",
+  q: "",
+  layout: store.get("layout", "grid"),
+  showPast: false,
+};
+const isNarrow = () => matchMedia("(max-width:759px)").matches;
+const kidOk = x => !state.kids || x.st!=="no";
+const mine = x => plan.has(x.id);
+
+/* ===== nav ===== */
+const ICONS = {
+ now:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+ lineup:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>',
+ venues:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
+ plan:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg>'
+};
+const VIEWS = [["now","Now"],["lineup","Lineup"],["venues","Venues"],["plan","My plan"]];
+function renderNav(){
+  const b = plan.size ? `<span class="badge">${plan.size}</span>` : "";
+  $(".tabs").innerHTML = VIEWS.map(([k,l])=>`<button data-view="${k}" ${state.view===k?'aria-current="page"':""}>${l}${k==="plan"?b:""}</button>`).join("");
+  $("nav.bottom").innerHTML = VIEWS.map(([k,l])=>`<button data-view="${k}" ${state.view===k?'aria-current="page"':""}>${ICONS[k]}<span>${k==="plan"?"Plan":l}</span>${k==="plan"?b:""}</button>`).join("");
+}
+
+/* ===== NOW ===== */
+function renderNow(){
+  const el = $("#v-now");
+  if (!el.dataset.built){
+    const ticks = [13,16,19,22,25].map(x=>`<span>${fmt(x*60)}</span>`).join("");
+    el.innerHTML = `<div class="clock"><div class="t" id="clock-t"></div><div class="meta" id="clock-meta"></div></div>
+      <div class="scrub"><label class="vh" for="scrub">Preview what's on at a time</label>
+        <input id="scrub" type="range" min="${13*60}" max="${T_MAX-15}" step="15">
+        <div class="ticks" aria-hidden="true">${ticks}</div></div>
+      <div id="now-body"></div>`;
+    el.dataset.built = 1;
+    $("#scrub").addEventListener("input", e => { state.T=+e.target.value; state.follow=false; renderNowBody(); });
+  }
+  const sc = $("#scrub");
+  sc.value = Math.min(Math.max(state.T,13*60),T_MAX-15);
+  renderNowBody();
+}
+function renderNowBody(){
+  const T = state.T, c = eventClock();
+  $("#clock-t").textContent = fmt(T);
+  $("#scrub").setAttribute("aria-valuetext", fmt(T));
+  let status;
+  if (c.phase==="live") status = state.follow ? `<span class="live">Live now</span>` : `<button class="btn" data-act="tonow">Back to now (${fmt(c.min)})</button>`;
+  else if (c.phase==="pre"||c.phase==="pre-today"){
+    const n=melNow(); const days=Math.round((Date.parse(EVENT_DAY)-Date.parse(n.date))/864e5);
+    status = `<span style="font-weight:700">${c.phase==="pre-today"?"Today":days===1?"Tomorrow":`In ${days} days`}, first sets from 1pm</span><span style="color:var(--muted);font-size:14px">Drag the slider to preview any time</span>`;
+  } else status = `<span style="font-weight:700">That's a wrap for 2026</span><span style="color:var(--muted);font-size:14px">Drag the slider to look back</span>`;
+  $("#clock-meta").innerHTML = status;
+
+  let playing=0, soon=0, h="";
+  const done=[], closedKids=[];
+  VENUES.forEach((v,vi)=>{
+    const sets = ALL.filter(x=>x.vi===vi);
+    const cur = sets.filter(x=>x.a<=T && T<x.b);
+    const nxt = sets.find(x=>x.a>T);
+    const coff = cutoff(v);
+    const curOk = cur.filter(x=> !state.kids || (x.st!=="no" && (coff===null || T<coff)));
+    const nxtOk = nxt && (!state.kids || nxt.st!=="no") ? nxt : null;
+    if (!curOk.length && !nxtOk){
+      if (sets.every(x=>x.b<=T)) done.push(v.n); else if (state.kids) closedKids.push(v.n);
+      return;
+    }
+    playing += curOk.length; if (nxtOk && nxtOk.a-T<=30) soon++;
+    h += `<div class="stop"><div class="stop-head"><span class="tag">${esc(v.n)}</span><a class="num" href="${mapUrl(v)}" target="_blank" rel="noopener" aria-label="Map: ${esc(v.a)}">${esc(num(v))}</a></div><div class="signs">`;
+    curOk.forEach(x=>{
+      const pct = Math.round((T-x.a)/(x.b-x.a)*100);
+      h += `<div class="sign ${mine(x)?"mine":""}"><div><div class="when">On now, till ${fmt(x.b)}${x.note?` · ${x.note}`:""} ${chip(x)}</div><button class="artist who" data-open="${x.id}">${esc(x.name)}</button></div>${starBtn(x)}<div class="bar" aria-hidden="true"><i style="width:${pct}%"></i></div></div>`;
+    });
+    if (nxtOk){
+      const inMin = nxtOk.a - T;
+      const rel = inMin<60 ? `Next in ${inMin} min, ${fmt(nxtOk.a)}` : `Next at ${fmt(nxtOk.a)}`;
+      h += `<div class="sign next ${mine(nxtOk)?"mine":""}"><div><div class="when">${rel}${nxtOk.note?` · ${nxtOk.note}`:""} ${chip(nxtOk)}</div><button class="artist who" data-open="${nxtOk.id}">${esc(nxtOk.name)}</button></div>${starBtn(nxtOk)}</div>`;
+    }
+    h += `</div></div>`;
+  });
+  $("#now-body").innerHTML = `
+    <p class="summary">${playing ? `${playing} set${playing>1?"s":""} on` : "Nothing on"} at ${fmt(T)}${soon?`, ${soon} more starting within 30 min`:""}${state.kids?". Under-18-friendly sets only.":""}</p>
+    ${h ? `<div class="street"><p class="dir">Walking north up High St. Tap a street number for the map.</p>${h}</div>` : `<div class="empty"><p><b>Nothing's on at ${fmt(T)}.</b></p><p>Drag the slider to an earlier time${state.kids?" or turn off ‘With under-18s’":""}.</p></div>`}
+    ${done.length?`<p class="after"><b>Finished for the night:</b> ${done.map(esc).join(", ")}</p>`:""}
+    ${closedKids.length?`<p class="after"><b>18+ at this time:</b> ${closedKids.map(esc).join(", ")}</p>`:""}`;
+}
+const starBtn = x => `<button class="star" data-star="${x.id}" aria-pressed="${mine(x)}" aria-label="${mine(x)?"Remove from":"Add to"} plan: ${esc(x.name)}">${mine(x)?"★":"☆"}</button>`;
+
+/* ===== LINEUP ===== */
+function lineupFiltered(){
+  const q = state.q.toLowerCase();
+  return ALL.filter(x => kidOk(x) && (!q || x.name.toLowerCase().includes(q) || x.v.n.toLowerCase().includes(q)));
+}
+function renderLineup(){
+  const el = $("#v-lineup");
+  const grid = state.layout==="grid" && !isNarrow();
+  if (!el.dataset.built){
+    el.innerHTML = `<h2 class="view-title">Lineup</h2>
+      <div class="toolbar">
+        <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+          <input type="search" id="q" placeholder="Find an artist or venue" aria-label="Find an artist or venue" autocomplete="off"></div>
+        <div class="seg layout" role="group" aria-label="Layout"><button data-layout="grid">Grid</button><button data-layout="list">List</button></div>
+      </div><div id="lineup-body"></div>`;
+    el.dataset.built = 1;
+    $("#q").oninput = e => { state.q=e.target.value.trim(); renderLineupBody(); };
+  }
+  el.querySelectorAll("[data-layout]").forEach(b=>b.setAttribute("aria-pressed", b.dataset.layout===state.layout));
+  renderLineupBody();
+}
+function renderLineupBody(){
+  const body = $("#lineup-body"), sets = lineupFiltered();
+  const grid = state.layout==="grid" && !isNarrow();
+  if (!sets.length){ body.innerHTML = `<div class="empty"><p><b>No sets match “${esc(state.q)}”.</b></p><p>Try part of a name, or a venue.${state.kids?" ‘With under-18s’ is hiding 18+ sets.":""}</p></div>`; return; }
+  const c = eventClock(), now = c.phase==="live" ? c.min : null;
+  if (grid){
+    const W = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--hourW"));
+    let h = `<div class="grid-wrap" id="gw"><div class="grid"><div class="g-head"><div class="corner"></div>`;
+    for (let i=T_MIN/60;i<T_MAX/60;i++) h += `<div class="hr">${fmt(i*60)}</div>`;
+    h += `</div><div style="position:relative">`;
+    VENUES.forEach((v,vi)=>{
+      const vs = sets.filter(x=>x.vi===vi); if(!vs.length) return;
+      const pc = policyClass(v);
+      h += `<div class="g-row"><div class="g-label"><b>${esc(v.n)}</b><span class="${pc}">${pc==="no"?"18+":pc==="part"?`U18 till ${fmt(cutoff(v))}`:v.u.t==="all"?"All ages":"U18 w/ adult"}</span></div><div class="g-track">`;
+      vs.forEach(x=>{
+        const ov = vs.some(y=>y!==x && y.a<x.b && x.a<y.b);
+        const lane = ov ? (x.note==="Garden"?"lane2":"lane1") : "";
+        const left=(x.a-T_MIN)/60*W+2, width=Math.max((x.b-x.a)/60*W-4,26);
+        const past = now!==null && x.b<=now;
+        h += `<button class="blk ${x.st} ${lane} ${mine(x)?"mine":""} ${past?"past":""}" data-open="${x.id}" style="left:${left}px;width:${width}px" title="${esc(x.name)}, ${fmt(x.a)}–${fmt(x.b)}"><span class="bt">${fmt(x.a)}${x.note?" · "+x.note:""}${mine(x)?" ★":""}</span><span class="bn">${esc(x.name)}</span></button>`;
+      });
+      h += `</div></div>`;
+    });
+    if (now!==null && now>=T_MIN && now<=T_MAX) h += `<div class="nowline" style="left:calc(var(--labelW) + ${(now-T_MIN)/60*W}px)"><span>Now</span></div>`;
+    h += `</div></div></div>
+      <div class="legend"><span><span class="chip ok">U18 OK</span> under-18s with an adult</span><span><span class="chip part">U18 till…</span> cutoff falls mid-set</span><span><span class="chip no">18+</span> adults only</span><span>★ in your plan</span></div>`;
+    const prev = $("#gw")?.scrollLeft;
+    body.innerHTML = h;
+    const gw = $("#gw"); const focus = now ?? (prev!=null?null:13*60);
+    gw.scrollLeft = focus!==null ? Math.max(0,(focus-T_MIN)/60*W - W) : prev;
+  } else {
+    const groups = {};
+    const pastN = now!==null && !state.q ? sets.filter(x=>x.b<=now).length : 0;
+    const shown = pastN && !state.showPast ? sets.filter(x=>x.b>now) : sets;
+    shown.slice().sort((p,q)=>p.a-q.a||p.vi-q.vi).forEach(x=>{ const k=Math.floor(x.a/60); (groups[k]=groups[k]||[]).push(x); });
+    body.innerHTML = (pastN ? `<button class="btn" data-act="past" style="margin:4px 0 6px">${state.showPast?`Hide ${pastN} finished sets`:`Show ${pastN} finished sets`}</button>` : "")
+      + Object.keys(groups).sort((a,b)=>a-b).map(k=>`<h3 class="hour">${fmt(k*60)}</h3><ul class="rows">${groups[k].map(x=>rowHtml(x,true,now)).join("")}</ul>`).join("");
+  }
+}
+function rowHtml(x, showVenue, now){
+  const past = now!=null && x.b<=now;
+  return `<li class="row ${mine(x)?"mine":""} ${past?"past":""}"><div class="tm">${fmt(x.a)}<small>to ${fmt(x.b)}</small></div><div><button class="artist who" data-open="${x.id}">${esc(x.name)}</button><div class="where">${showVenue?`<span>${esc(x.v.n)}${x.note?` (${x.note})`:""}</span>`:x.note?`<span>${x.note}</span>`:""}${chip(x)}</div></div>${starBtn(x)}</li>`;
+}
+
+/* ===== VENUES ===== */
+function renderVenues(){
+  const c = eventClock(), now = c.phase==="live" ? c.min : null;
+  let h = `<h2 class="view-title">Venues</h2><p class="lede">In order walking north up High St, then the two just off it. Tap an address for directions, or see the <a href="https://images.squarespace-cdn.com/content/v1/6a9d38b6ce124d608f61aaff/07e85a72-8fe8-41f4-90e7-308e246e315b/UPDATED+MAP+DRAFT.png" target="_blank" rel="noopener">official map</a>.</p><div class="venues">`;
+  VENUES.forEach((v,vi)=>{
+    const sets = ALL.filter(x=>x.vi===vi && kidOk(x));
+    if (state.kids && !sets.length) return;
+    h += `<article class="venue"><span class="tag">${esc(v.n)}</span>
+      <div class="addr"><a href="${mapUrl(v)}" target="_blank" rel="noopener">${esc(v.a)}</a><span style="color:var(--muted)">${esc(v.k)}</span></div>
+      <div class="pol"><span class="chip ${policyClass(v)}">${policyClass(v)==="no"?"18+":policyClass(v)==="part"?"U18 till "+fmt(cutoff(v)):"U18 OK"}</span>${esc(policyText(v))}</div>
+      <ul class="rows">${sets.map(x=>rowHtml(x,false,now)).join("")}</ul></article>`;
+  });
+  h += `</div><p class="foot">Set times transcribed from the official schedule poster. Under-18 policies are from the <a href="https://www.thornburycrawl.com/venues" target="_blank" rel="noopener">official venues page</a>; under-18s need a responsible adult and venues can still refuse entry. Artist notes are best-effort. Entry is free but <a href="https://tickets.oztix.com.au/outlet/event/9c4f2a45-88c0-4e2c-b516-61c1553c483d" target="_blank" rel="noopener">register for a ticket on Oztix</a>.</p>`;
+  $("#v-venues").innerHTML = h;
+}
+
+/* ===== PLAN ===== */
+function planList(ids, withGaps){
+  const xs = ids.map(id=>BY[id]).sort((p,q)=>p.a-q.a||p.vi-q.vi);
+  let h = `<ul class="rows">`;
+  xs.forEach((x,i)=>{
+    if (withGaps && i){
+      const prev = xs[i-1];
+      const clashes = xs.slice(0,i).filter(y=>y.b>x.a);
+      if (clashes.length) h += `<li class="gap clash">⚠ Clashes with ${clashes.map(y=>esc(y.name)).join(", ")}</li>`;
+      else { const g = x.a - prev.b; h += `<li class="gap">${g===0?"Straight on":g<60?`${g} min free`:`${Math.floor(g/60)}h${g%60?" "+g%60+"m":""} free`}${prev.vi!==x.vi?` · ${esc(prev.v.n)} → ${esc(x.v.n)}`:""}</li>`; }
+    }
+    h += rowHtml(x,true,null);
+  });
+  return h + `</ul>`;
+}
+function renderPlan(){
+  const el = $("#v-plan");
+  const ids = [...plan];
+  let h = `<h2 class="view-title">My plan</h2>`;
+  const sharedNew = shared.filter(id=>!plan.has(id));
+  if (shared.length){
+    h += `<div class="shared"><h3>A friend shared their plan</h3><p>${shared.length} set${shared.length>1?"s":""}${sharedNew.length<shared.length?`, ${shared.length-sharedNew.length} already in yours`:""}.</p>
+      ${planList(shared,false)}
+      <div class="plan-actions" style="margin:12px 0 0">${sharedNew.length?`<button class="btn pink" data-act="addshared">Add ${sharedNew.length===shared.length?"all":sharedNew.length+" new"} to my plan</button>`:""}<button class="btn" data-act="dismiss">Dismiss</button></div></div>`;
+  }
+  if (!ids.length){
+    h += `<div class="empty"><p><b>Your plan is empty.</b></p><p>Tap ☆ on any set to add it. Then share the link so your crew knows where to find you.</p><p style="margin-top:14px"><button class="btn solid" data-view="lineup">Browse the lineup</button></p></div>`;
+  } else {
+    h += `<p class="lede">${ids.length} set${ids.length>1?"s":""}, in time order. Clashes and gaps are worked out for you.</p>
+      <div class="plan-actions"><button class="btn pink" data-act="share">Share my plan</button><button class="btn" data-act="ics">Add to calendar</button><button class="btn" data-act="clear">Clear</button></div>
+      ${planList(ids,true)}`;
+  }
+  el.innerHTML = h;
+}
+
+/* ===== sheet ===== */
+const sheet = $("#sheet");
+function openSheet(id){
+  const x = BY[id]; if(!x) return;
+  const b = BLURBS[x.name];
+  const others = ALL.filter(z=>z.name===x.name && z!==x);
+  const cut = cutoff(x.v);
+  const kidLine = x.st==="part" ? `Under-18s must leave at ${fmt(cut)}, partway through this set.` : x.st==="no" ? (x.v.u.t==="18"?"Strictly 18+.":`18+ from ${fmt(cut)}.`) : policyText(x.v)+".";
+  $("#sh").innerHTML = `<div class="grab" aria-hidden="true"></div><button class="x" data-act="close" aria-label="Close">×</button>
+    <h3 id="sh-title">${esc(x.name)}</h3>
+    <div class="facts">
+      <div><b>${fmt(x.a)} to ${fmt(x.b)}</b>${x.note?` · ${x.note}`:""}</div>
+      <div>${esc(x.v.n)} · <a href="${mapUrl(x.v)}" target="_blank" rel="noopener">${esc(x.v.a)}</a></div>
+      <div>${chip(x)} <span>${esc(kidLine)}</span></div>
+    </div>
+    <p class="blurb ${b?"":"none"}">${b?esc(b):"No bio yet. Likely a local act worth a punt."}</p>
+    ${others.length?`<p class="also">Also playing ${others.map(o=>`<button class="artist" style="text-decoration:underline" data-open="${o.id}">${esc(o.v.n)} at ${fmt(o.a)}</button>`).join(", ")}</p>`:""}
+    <div class="acts"><button class="btn ${mine(x)?"solid":"pink"}" data-star="${x.id}">${mine(x)?"★ In your plan (remove)":"☆ Add to my plan"}</button>
+    <a class="btn" href="https://www.google.com/search?q=${encodeURIComponent(x.name.replace(/:.*/,"")+" Melbourne music")}" target="_blank" rel="noopener">Look them up</a></div>`;
+  if (!sheet.open) sheet.showModal();
+}
+sheet.addEventListener("click", e => { if (e.target===sheet) sheet.close(); });
+
+/* ===== actions ===== */
+function toast(msg){ const t=$("#toast"); t.textContent=msg; t.classList.add("on"); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("on"),2200); }
+function savePlan(){ store.set("plan",[...plan]); }
+function shareUrl(){ return location.origin+location.pathname+"?plan="+[...plan].sort().join(","); }
+async function share(){
+  const url = shareUrl(), text = `My Thornbury Crawl plan (${plan.size} sets)`;
+  if (navigator.share){ try{ await navigator.share({title:"Thornbury Crawl plan", text, url}); return; }catch(e){ if(e.name==="AbortError") return; } }
+  try { await navigator.clipboard.writeText(url); toast("Link copied. Paste it to your friends."); }
+  catch(e){ prompt("Copy this link:", url); }
+}
+function ics(){
+  const base = Date.UTC(2026,9,24,0,0) - 11*3600e3; // AEDT = UTC+11
+  const d = m => new Date(base + m*60e3).toISOString().replace(/[-:]/g,"").replace(/\.\d+/,"");
+  const lines = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//thornbury-crawl//plan//EN","CALSCALE:GREGORIAN"];
+  [...plan].map(id=>BY[id]).forEach(x=>{
+    lines.push("BEGIN:VEVENT",`UID:tc2026-${x.id}@thornburycrawl`,`DTSTAMP:${d(0)}`,`DTSTART:${d(x.a)}`,`DTEND:${d(x.b)}`,
+      `SUMMARY:${x.name.replace(/[,;]/g,"\\$&")} @ ${x.v.n.replace(/[,;]/g,"\\$&")}`,`LOCATION:${(x.v.n+", "+x.v.a).replace(/[,;]/g,"\\$&")}`,"END:VEVENT");
+  });
+  lines.push("END:VCALENDAR");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([lines.join("\r\n")],{type:"text/calendar"}));
+  a.download = "thornbury-crawl-plan.ics"; a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 2000);
+}
+
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-view],[data-star],[data-open],[data-act],[data-layout]");
+  if (!t) return;
+  if (t.dataset.view){ setView(t.dataset.view); return; }
+  if (t.dataset.layout){ state.layout=t.dataset.layout; store.set("layout",state.layout); renderLineup(); return; }
+  if (t.dataset.star){
+    const id=t.dataset.star, x=BY[id];
+    if (plan.has(id)){ plan.delete(id); toast(`Removed ${x.name}`); }
+    else {
+      plan.add(id);
+      const clash = [...plan].map(i=>BY[i]).find(y=>y!==x && y.a<x.b && x.a<y.b);
+      toast(clash ? `Added. Heads up: clashes with ${clash.name}` : `Added ${x.name} to your plan`);
+    }
+    savePlan(); refresh(); if (sheet.open) openSheet(id); return;
+  }
+  if (t.dataset.open){ openSheet(t.dataset.open); return; }
+  const act = t.dataset.act;
+  if (act==="close") sheet.close();
+  if (act==="tonow"){ state.follow=true; state.T=eventClock().min; renderNow(); }
+  if (act==="share") share();
+  if (act==="past"){ state.showPast=!state.showPast; renderLineupBody(); }
+  if (act==="ics") ics();
+  if (act==="clear" && confirm("Clear every set from your plan?")){ plan.clear(); savePlan(); refresh(); }
+  if (act==="addshared"){ shared.forEach(id=>plan.add(id)); savePlan(); toast("Added to your plan"); dismissShared(); }
+  if (act==="dismiss") dismissShared();
+});
+function dismissShared(){ shared.length=0; history.replaceState(null,"",location.pathname); refresh(); }
+
+function setView(v){
+  state.view=v; store.set("view",v);
+  VIEWS.forEach(([k])=>$("#v-"+k).classList.toggle("hidden", k!==v));
+  refresh(); window.scrollTo({top:0});
+}
+function refresh(){
+  renderNav();
+  ({now:renderNow, lineup:renderLineup, venues:renderVenues, plan:renderPlan})[state.view]();
+}
+
+/* kids toggle */
+const kidsEl = $("#kids"); kidsEl.checked = state.kids;
+kidsEl.onchange = () => { state.kids = kidsEl.checked; store.set("kids", state.kids); refresh(); toast(state.kids ? "Showing sets under-18s can attend" : "Showing all sets"); };
+
+/* theme */
+const savedTheme = store.get("theme", null);
+if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+$("#theme").onclick = () => {
+  const dark = getComputedStyle(document.documentElement).colorScheme.includes("dark");
+  const next = dark ? "light" : "dark";
+  document.documentElement.dataset.theme = next; store.set("theme", next);
+  document.querySelectorAll('meta[name=theme-color]').forEach(m=>m.content = next==="dark"?"#1E1B16":"#F3D24C");
+};
+
+/* live clock: follow real time on the day */
+setInterval(()=>{
+  const c = eventClock();
+  if (c.phase==="live" && state.follow){ state.T=c.min; if(state.view==="now") renderNow(); }
+}, 60e3);
+let lastNarrow = isNarrow();
+addEventListener("resize", ()=>{ if (isNarrow()!==lastNarrow){ lastNarrow=isNarrow(); if(state.view==="lineup") renderLineupBody(); } });
+
+setView(state.view);
+</script>
+</body>
+</html>
